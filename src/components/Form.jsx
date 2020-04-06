@@ -2,12 +2,13 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import styles from "./form.module.css";
 
-function clickHandler() {
-  let history = useHistory;
-
-  history.push("/home");
-}
 export function Form() {
+  const history = useHistory();
+
+  function clickHandler() {
+    history.push("/Game");
+  }
+
   return (
     <main className={styles.main}>
       <div className={styles.border}>

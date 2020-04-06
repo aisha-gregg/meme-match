@@ -1,9 +1,15 @@
-import React, { usehistory } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import styles from "./home.module.css";
+import React from "react";
+import { Form } from "../components/Form";
 
-const route = usehistory();
+import { Page } from "../components/Page";
+import { Board } from "../components/Board";
 
 export function Home() {
-  return <main></main>;
+  return (
+    <>
+      <Page></Page>
+      <Form></Form>
+      <Board></Board>
+    </>
+  );
 }

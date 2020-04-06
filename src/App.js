@@ -1,24 +1,24 @@
 import React from "react";
 
-import "./App.css";
-import { Card } from "./components/Card";
-import { Header } from "./components/Header";
-import { Form } from "./components/Form";
+import { Game } from "./pages/Game";
 
-function App() {
+import "./App.css";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Home } from "./pages/Home";
+
+export function App() {
   return (
     <div className="App">
-      <Header></Header>
-      <Form></Form>
-
-      <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      ></a>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Home></Home>
+          </Route>
+          <Route path="/game">
+            <Game></Game>
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
-
-export default App;
