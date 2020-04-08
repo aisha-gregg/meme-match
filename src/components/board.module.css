@@ -1,7 +1,9 @@
 .gameBoard {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 2fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-rows: repeat(5, 1fr);
   grid-gap: 10px;
+  height: 100vh;
   padding: var(--medium);
   border-style: double;
 }
