@@ -28,7 +28,7 @@
 }
 
 .image {
-  object-fit: cover;
+  object-fit: fill;
   height: 100%;
 }
 
