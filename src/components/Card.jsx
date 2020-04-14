@@ -4,12 +4,12 @@ import classNames from "classnames/bind";
 
 const cx = classNames.bind(styles);
 
-export function Card({ image }) {
+export function Card({ image, onClick }) {
   const [isRevealed, setIsRevealed] = useState(false);
 
   return (
     <>
-      <div className={cx("scene")}>
+      <div className={cx("scene")} onClick={onClick}>
         <div
           className={cx("card", {
             "is-flipped": !isRevealed,

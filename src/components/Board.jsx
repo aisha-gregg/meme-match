@@ -8,7 +8,7 @@ const cx = classNames.bind(styles);
 
 export function Board() {
   const [memes, setMemes] = useState([]);
-  const [revealed, setRevealed] = useState();
+
   useEffect(() => {
     fetchMemes();
   }, []);
@@ -24,19 +24,20 @@ export function Board() {
 
   return (
     <div className={cx("gameBoard")}>
-      {memes.map((meme) => (
-        <Card key={meme.id} image={meme.image}></Card>
+      {memes.map((meme, index) => (
+        <Card key={index} image={meme.image}></Card>
       ))}
     </div>
   );
-}
 
-// Passing values as reference
-function getRandomizedArray(array) {
-  const arrayCopy = [...array];
-  for (let i = arrayCopy.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arrayCopy[i], arrayCopy[j]] = [arrayCopy[j], arrayCopy[i]];
+  // Passing values as reference
+  function getRandomizedArray(array) {
+    const arrayCopy = [...array];
+    for (let i = arrayCopy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arrayCopy[i], arrayCopy[j]] = [arrayCopy[j], arrayCopy[i]];
+    }
+
+    return arrayCopy;
   }
-  return arrayCopy;
 }

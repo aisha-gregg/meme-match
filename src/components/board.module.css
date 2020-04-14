@@ -9,3 +9,7 @@
   height: 100vh;
   padding: var(--medium);
 }
+
+.disabled {
+  display: block;
+}
