@@ -9,6 +9,8 @@ const cx = classNames.bind(styles);
 
 export function Game() {
   const [memes, setMemes] = useState([]);
+  const [flippedMemes, setFlippedMemes] = useState([]);
+  const [peekedMemes, setPeekedMemes] = useState([]);
 
   useEffect(() => {
     fetchMemes();
@@ -23,12 +25,30 @@ export function Game() {
     setMemes(randomizedDuplicatedMemes);
   }
 
+  function peek(id) {
+    setPeekedMemes([...peekedMemes, id]);
+  }
+
+  function isFlipped(id) {
+    return flippedMemes.includes(id);
+  }
+  function isPeeked(id) {
+    return peekedMemes.includes(id);
+  }
   return (
-    <div className={cx("gameBoard")}>
-      {memes.map((meme, index) => (
-        <Card key={index} image={meme.image}></Card>
-      ))}
-    </div>
+    <>
+      F: {flippedMemes} - P: {peekedMemes}
+      <div className={cx("gameBoard")}>
+        {memes.map((meme, index) => (
+          <Card
+            isRevealed={isFlipped(meme.id) || isPeeked(meme.id)}
+            key={index}
+            image={meme.image}
+            onClick={() => peek(meme.id)}
+          ></Card>
+        ))}
+      </div>
+    </>
   );
 
   // Passing values as reference
