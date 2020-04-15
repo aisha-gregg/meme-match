@@ -28,12 +28,22 @@ export function Game() {
   function peek(id) {
     setPeekedMemes([...peekedMemes, id]);
   }
-
   function isFlipped(id) {
-    return flippedMemes.includes(id);
+    for (let i = 0; i < flippedMemes.length; i++) {
+      if (flippedMemes[i] === id) {
+        return true;
+      }
+    }
+    return false;
   }
+
   function isPeeked(id) {
-    return peekedMemes.includes(id);
+    for (let i = 0; i < peekedMemes.length; i++) {
+      if (peekedMemes[i] === id) {
+        return true;
+      }
+    }
+    return false;
   }
   return (
     <>
