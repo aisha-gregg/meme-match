@@ -16,6 +16,10 @@ export function Game() {
     fetchMemes();
   }, []);
 
+  useEffect(() => {
+    checkMatched();
+  }, [peekedMemes]);
+
   async function fetchMemes() {
     const memeRepository = new MemeRepository();
     const memes = await memeRepository.findAll();
@@ -50,7 +54,9 @@ export function Game() {
       setFlippedMemes([...flippedMemes, ...peekedMemes]);
       setPeekedMemes([]);
     } else {
-      setPeekedMemes([]);
+      setTimeout(() => {
+        setPeekedMemes([]);
+      }, 1000);
     }
   }
 
@@ -70,7 +76,6 @@ export function Game() {
             onClick={() => {
               if (!isRevealed(index)) {
                 peek({ index, id: meme.id });
-                checkMatched();
               }
             }}
           ></Card>
