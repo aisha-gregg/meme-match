@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import styles from "./card.module.css";
 import classNames from "classnames/bind";
+import { useEffect } from "react";
 
 const cx = classNames.bind(styles);
 
-export function Card({ image, onClick }) {
+export function Card({ image, onClick, matched }) {
   const [isRevealed, setIsRevealed] = useState(false);
+
+  useEffect(() => {
+    setIsRevealed(matched);
+  }, []);
 
   return (
     <>
@@ -15,7 +20,9 @@ export function Card({ image, onClick }) {
             "is-flipped": !isRevealed,
           })}
           onClick={() => {
-            setIsRevealed(!isRevealed);
+            if (!matched) {
+              setIsRevealed(!isRevealed);
+            }
           }}
         >
           <div className={cx("card-face", "card-front")}>
