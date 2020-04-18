@@ -54,6 +54,10 @@ export function Game() {
     }
   }
 
+  function isRevealed(index) {
+    return isPeeked(index) || isFlipped(index);
+  }
+
   return (
     <>
       F: {JSON.stringify(flippedMemes)} - P: {JSON.stringify(peekedMemes)}
@@ -61,10 +65,10 @@ export function Game() {
         {memes.map((meme, index) => (
           <Card
             key={index}
-            isRevealed={isPeeked(index) || isFlipped(index)}
+            isRevealed={isRevealed(index)}
             image={meme.image}
             onClick={() => {
-              if (!isPeeked(index) && !isFlipped(index)) {
+              if (!isRevealed(index)) {
                 peek({ index, id: meme.id });
                 checkMatched();
               }
