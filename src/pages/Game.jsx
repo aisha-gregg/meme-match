@@ -29,26 +29,27 @@ export function Game() {
     setPeekedMemes([...peekedMemes, { id, index }]);
   }
 
-  function isFlipped({ id, index }) {
+  function isFlipped(index) {
     return flippedMemes.map((flippedMeme) => flippedMeme.index).includes(index);
   }
 
-  function isPeeked({ id, index }) {
+  function isPeeked(index) {
     return peekedMemes.map((peekedMeme) => peekedMeme.index).includes(index);
   }
 
-  function isMatched() {
+  function checkMatched() {
     if (peekedMemes.length < 2) {
       return;
     }
 
-    const matchCheck = peekedMemes.every(
+    const isMatched = peekedMemes.every(
       (peekedMeme) => peekedMemes[0].id === peekedMeme.id
     );
-    if (!matchCheck) {
+
+    if (isMatched) {
+      setFlippedMemes([...flippedMemes, ...peekedMemes]);
       setPeekedMemes([]);
     } else {
-      setFlippedMemes([...flippedMemes, ...peekedMemes]);
       setPeekedMemes([]);
     }
   }
@@ -60,14 +61,13 @@ export function Game() {
         {memes.map((meme, index) => (
           <Card
             key={index}
-            isRevealed={
-              isPeeked({ id: meme.id, index }) ||
-              isFlipped({ id: meme.id, index })
-            }
+            isRevealed={isPeeked(index) || isFlipped(index)}
             image={meme.image}
             onClick={() => {
-              peek({ index, id: meme.id });
-              isMatched();
+              if (!isPeeked(index) && !isFlipped(index)) {
+                peek({ index, id: meme.id });
+                checkMatched();
+              }
             }}
           ></Card>
         ))}
