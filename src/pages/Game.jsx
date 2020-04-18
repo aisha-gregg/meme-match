@@ -25,31 +25,21 @@ export function Game() {
     setMemes(randomizedDuplicatedMemes);
   }
 
-  function peek(id) {
-    setPeekedMemes([...peekedMemes, id]);
+  function peek({ id, index }) {
+    setPeekedMemes([...peekedMemes, { id, index }]);
   }
 
   function isFlipped(id) {
-    for (let i = 0; i < flippedMemes.length; i++) {
-      if (flippedMemes[i] === id) {
-        return true;
-      }
-    }
-    return false;
+    return flippedMemes.map((flippedMeme) => flippedMeme.id).includes(id);
   }
 
-  function isPeeked(id) {
-    for (let i = 0; i < peekedMemes.length; i++) {
-      if (peekedMemes[i] === id) {
-        return true;
-      }
-    }
-    return false;
+  function isPeeked({ id, index }) {
+    return peekedMemes.map((peekedMeme) => peekedMeme.index).includes(index);
   }
 
   function isMatched() {
     const matchCheck = peekedMemes.every(
-      (peekedMeme) => peekedMemes[0] === peekedMeme
+      (peekedMeme) => peekedMemes[0].id === peekedMeme.id
     );
     if (!matchCheck) {
       setPeekedMemes([]);
@@ -58,16 +48,15 @@ export function Game() {
 
   return (
     <>
-      F: {flippedMemes} - P: {peekedMemes}
+      F: {flippedMemes} - P: {JSON.stringify(peekedMemes)}
       <div className={cx("gameBoard")}>
         {memes.map((meme, index) => (
           <Card
-            isFrozen={isFlipped(meme.id) || isPeeked(meme.id)}
-            matched={isMatched(meme.id) && isPeeked(meme.id)}
             key={index}
+            isRevealed={isPeeked({ id: meme.id, index })}
             image={meme.image}
             onClick={() => {
-              peek(meme.id);
+              peek({ index, id: meme.id });
               isMatched(meme.id);
             }}
           ></Card>
