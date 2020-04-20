@@ -4,6 +4,8 @@ import classNames from "classnames/bind";
 import { useState } from "react";
 import { MemeRepository } from "../components/MemeRepository";
 import { Card } from "./../components/Card";
+import { Header } from "../components/Header";
+import { PlayerIcon } from "../components/PlayerIcon";
 
 const cx = classNames.bind(styles);
 
@@ -11,6 +13,7 @@ export function Game() {
   const [memes, setMemes] = useState([]);
   const [flippedMemes, setFlippedMemes] = useState([]);
   const [peekedMemes, setPeekedMemes] = useState([]);
+  let max = 2;
 
   useEffect(() => {
     fetchMemes();
@@ -23,7 +26,10 @@ export function Game() {
   async function fetchMemes() {
     const memeRepository = new MemeRepository();
     const memes = await memeRepository.findAll();
-    const duplicatedMemes = [...memes, ...memes];
+    const duplicatedMemes = Array.from(
+      { length: max },
+      (key, value) => value + 1
+    ).reduce((previous) => [...previous, ...memes], []);
 
     const randomizedDuplicatedMemes = getRandomizedArray(duplicatedMemes);
     setMemes(randomizedDuplicatedMemes);
@@ -42,7 +48,7 @@ export function Game() {
   }
 
   function checkMatched() {
-    if (peekedMemes.length < 2) {
+    if (peekedMemes.length < max) {
       return;
     }
 
@@ -66,15 +72,17 @@ export function Game() {
 
   return (
     <>
-      F: {JSON.stringify(flippedMemes)} - P: {JSON.stringify(peekedMemes)}
+      <Header></Header>
+      <PlayerIcon></PlayerIcon>
       <div className={cx("gameBoard")}>
         {memes.map((meme, index) => (
           <Card
             key={index}
             isRevealed={isRevealed(index)}
+            isMatched={isFlipped(index)}
             image={meme.image}
             onClick={() => {
-              if (!isRevealed(index)) {
+              if (!isRevealed(index) && peekedMemes.length < max) {
                 peek({ index, id: meme.id });
               }
             }}

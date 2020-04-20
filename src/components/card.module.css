@@ -23,8 +23,9 @@
 }
 
 .card-back {
-  background-color: var(--secondary-color);
+  background-color: hsl(277, 92%, 34%);
   transform: rotateY(180deg);
+  border-radius: 20px;
 }
 
 .image {
@@ -34,4 +35,22 @@
 
 .is-flipped {
   transform: translateX(-100%) rotateY(-180deg);
+}
+
+.is-matched {
+  animation: pulse 0.5s;
+
+  transition-delay: 0.3s;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  80% {
+    transform: scale(1);
+  }
 }

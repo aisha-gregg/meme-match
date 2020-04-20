@@ -4,13 +4,14 @@ import classNames from "classnames/bind";
 
 const cx = classNames.bind(styles);
 
-export function Card({ image, onClick, isRevealed }) {
+export function Card({ image, onClick, isRevealed, isMatched }) {
   return (
     <>
       <div className={cx("scene")} onClick={onClick}>
         <div
           className={cx("card", {
             "is-flipped": !isRevealed,
+            "is-matched": isMatched,
           })}
         >
           <div className={cx("card-face", "card-front")}>
