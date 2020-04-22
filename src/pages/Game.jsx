@@ -5,7 +5,7 @@ import { useState } from "react";
 import { MemeRepository } from "../components/MemeRepository";
 import { Card } from "./../components/Card";
 import { Header } from "../components/Header";
-import { PlayerIcon } from "../components/PlayerIcon";
+import { UserContext } from "./userContext";
 
 const cx = classNames.bind(styles);
 
@@ -73,7 +73,8 @@ export function Game() {
   return (
     <>
       <Header></Header>
-      <PlayerIcon></PlayerIcon>
+      <div> </div>
+      <UserContext.Provider value={UserContext}>Welcome</UserContext.Provider>
       <div className={cx("gameBoard")}>
         {memes.map((meme, index) => (
           <Card

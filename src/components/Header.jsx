@@ -11,7 +11,7 @@ export function Header() {
           src="https://img.icons8.com/ios/50/000000/for-experienced.png"
         />
       </div>
-      Memory-Matcher Game
+      Memery-Match Game
       <h4> Work your memory and have a laugh!</h4>
     </div>
   );
