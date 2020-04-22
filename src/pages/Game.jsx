@@ -5,7 +5,8 @@ import { useState } from "react";
 import { MemeRepository } from "../components/MemeRepository";
 import { Card } from "./../components/Card";
 import { Header } from "../components/Header";
-import { UserContext } from "./userContext";
+import { useContext } from "react";
+import { UserContext } from "../userContext";
 
 const cx = classNames.bind(styles);
 
@@ -13,6 +14,7 @@ export function Game() {
   const [memes, setMemes] = useState([]);
   const [flippedMemes, setFlippedMemes] = useState([]);
   const [peekedMemes, setPeekedMemes] = useState([]);
+  const { username } = useContext(UserContext);
   let max = 2;
 
   useEffect(() => {
@@ -74,7 +76,7 @@ export function Game() {
     <>
       <Header></Header>
       <div> </div>
-      <UserContext.Provider value={UserContext}>Welcome</UserContext.Provider>
+      <h3>Welcome {username}</h3>
       <div className={cx("gameBoard")}>
         {memes.map((meme, index) => (
           <Card
