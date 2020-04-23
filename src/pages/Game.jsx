@@ -7,6 +7,7 @@ import { Card } from "./../components/Card";
 import { Header } from "../components/Header";
 import { useContext } from "react";
 import { UserContext } from "../userContext";
+import { CountdownTimer } from "../components/CountdownTimer";
 
 const cx = classNames.bind(styles);
 
@@ -74,6 +75,7 @@ export function Game() {
 
   return (
     <>
+      <CountdownTimer></CountdownTimer>
       <Header></Header>
       <div> </div>
       <h3>Welcome {username}</h3>
