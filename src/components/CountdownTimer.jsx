@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useInterval } from "./useInterval";
+import styles from "./CountdownTimer.css";
 
 export function CountdownTimer() {
   const [counter, setCounter] = useState(0);
@@ -16,7 +17,7 @@ export function CountdownTimer() {
   }
 
   return (
-    <div>
+    <div className={styles.counter}>
       <h1>Countdown</h1>
 
       {formatSeconds(counter)}
